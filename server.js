@@ -4,13 +4,14 @@ const socketIo = require('socket.io');
 const path = require('path');
 const fs = require('fs');
 const EventEmitter = require('events');
+const cors = require('cors'); // Importar pacote CORS
 require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: '*', // Permite qualquer origem
+        origin: '*', // Permite qualquer origem para Socket.io
         methods: ['GET', 'POST']
     }
 });
@@ -21,22 +22,8 @@ const scannerEvents = new EventEmitter();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(cors()); // Usar o middleware CORS padrão
 app.use(express.json());
-
-// CORS - permitir requisições do Vercel
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); // Permite qualquer origem
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-
-    next();
-});
 
 app.use(express.static(__dirname)); // Servir arquivos da raiz
 
