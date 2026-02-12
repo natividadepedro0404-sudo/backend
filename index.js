@@ -55,12 +55,14 @@ const GAMERTAG_FORMATS = [
 ];
 
 client.on('ready', async () => {
-    console.clear();
+    // console.clear(); // Remover clear para não apagar logs na nuvem
     console.log('='.repeat(60));
-    console.log('🎮 XBOX SCANNER 🎮');
+    console.log('🎮 XBOX SCANNER INICIALIZADO 🎮');
     console.log('='.repeat(60));
     console.log(`✅ Bot conectado como: ${client.user.tag}`);
     console.log(`🏠 Servidores disponíveis: ${client.guilds.cache.size}`);
+    console.log('='.repeat(60));
+    console.log('🌐 Conectado ao Dashboard');
     console.log('='.repeat(60));
     console.log('🌐 Dashboard disponível em: http://localhost:3000');
     console.log('💡 Use o dashboard para controlar o scanner');
