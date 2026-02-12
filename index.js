@@ -618,7 +618,10 @@ async function sendGamertagInfo(member, guild, xboxInfo) {
 
 
 // Iniciar o cliente
-client.login(DISCORD_TOKEN);
+client.login(DISCORD_TOKEN).catch(err => {
+    console.error('❌ ERRO CRÍTICO AO LOGAR NO DISCORD:', err.message);
+    console.log('💡 DICA: Verifique se o DISCORD_TOKEN está correto nas variáveis de ambiente do Render/Railway.');
+});
 
 // Tratar CTRL+C
 process.on('SIGINT', () => {
